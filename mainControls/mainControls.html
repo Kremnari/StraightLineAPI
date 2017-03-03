@@ -1,0 +1,6 @@
+<span class="btn btn-info" ng-click="mc.selectFiles()">Load JSON</span>
+<span class="btn btn-info" ng-click="mc.jsonFile.downloadFile()">Download JSON</span>
+<input type="file" class='hidden' id="loadJson" onchange="angular.element(this).scope().$parent.mc.loadFiles(this)"/>
+<span class="btn btn-warning" ng-click="mc.generate()">Generate php</span>
+<span class="btn btn-info" ng-click="mc.downloadProject()">Download Server Code</span>
+<button class="btn btn-info" ng-click="mc.showOptions()">Show Options</button>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>StraightLine: API Builder & Code Generator</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="include/jquery-2.1.1.js"></script>
+        <script src="include/angular/angular.js"></script>
+        <script src="include/angular/ui-utils.js"></script>
+        <script src="include/angular/angular-ui-tree.js"></script>
+        <script src="include/bootstrap/bootstrap.js"></script>
+        <script src="include/bootstrap/ui-bootstrap-tpls-0.13.0.js"></script>
+        <script src="include/bootstrap/bootbox.min.js"></script>
+        <script src="include/downloader.js"></script>
+        <script src="include/zipjs/zip.js"></script>
+        <script src="include/zipjs/zip-ext.js"></script>
+        <script src="include/zipjs/zip-fs.js"></script>
+        <script src="js2ph-api/main.js"></script>
+        <script src="include/lib.js"></script>
+        <link rel="stylesheet" href="include/angular/angular-ui-tree.min.css" />
+        <link rel="stylesheet" href="include/bootstrap/bootstrap.css" />
+        <link rel="stylesheet" href="include/main.css" />
+    </head>
+    <body ng-app="j2pApp">
+        <section ng-controller="apiRequests as ar" ng-include="'apiRequests/apiRequests.html'" class="apiRequests" ng-show="ar.showMe">
+            <script src="apiRequests/apiRequests.js"></script>
+        </section>
+        <!-- section ng-controller="conceptDiagram as cd" ng-include="'conceptDiagram/conceptDiagram.html'" id="conceptDiagram">
+            <script src="conceptDiagram/conceptDiagram.js"></script>
+        </section -->
+        <section ng-controller="apiOptions as ao" ng-include="'apiOptions/apiOptions.html'" id="apiOptions" ng-show="ao.showMe">
+            <script src="apiOptions/apiOptions.js"></script>
+        </section>
+        <div class="splitvert">
+            <section ng-controller="jsonViewer as jv" ng-include="'jsonViewer/jsonViewer.html'" class="jsonViewer" ng-show="jv.showMe">
+                <script src="jsonViewer/jsonFile.js"></script>
+                <script src="jsonViewer/jsonViewer.js"></script>
+            </section>
+            <section ng-controller="apiFunctions as af" ng-include=" 'apiFunctions/apiFunctions.html'" class="apiFunctions" ng-show="af.showMe">
+                <script src="apiFunctions/apiFunctions.js"></script>
+            </section>
+            <section ng-controller2="helpData as hd" ng-include="'helpData/helpData.html'" class="helpData">
+                <script src="helpData/helpData.js"></script>
+            </section>
+        </div>
+        <!--section ng-controller="phpViewer as pv" ng-include="'phpViewer/phpViewer.html'" class="phpViewer">
+            <script src="phpViewer/phpViewer.js"></script>
+        </section-->
+        <div ng-controller="mainControls as mc" ng-include="'mainControls/mainControls.html'" class="mainControls">
+            <script src="mainControls/mainControls.js"></script>
+            <script src="codeBuilder/codeBuilder.js"></script>
+            <script src="zipSources/zipSources.js"></script>
+        </div>
+</body>
+</html>
