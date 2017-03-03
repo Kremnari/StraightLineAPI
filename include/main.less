@@ -1,0 +1,82 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 19, 2015, 11:39:48 PM
+    Author     : KREMNARI
+*/
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
+
+body {
+  background-color: black;
+  color: lightgreen;
+}
+section {
+  border: 1px solid yellow;
+  width: 30%;
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  height: 500px;
+  overflow: auto;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  text-align: center;
+}
+.splitvert {
+  width: 30%;
+  display: inline-block;
+}
+.splitvert section {
+  resize: vertical;
+  height: 250px;
+  width: 100%;
+  overflow: auto;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 15%;
+}
+.hidden {
+  display: none;
+}
+input,
+select {
+  background-color: black;
+}
+.btn-info {
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+textarea {
+  background-color: black;
+  color: lightgreen;
+}
+.collLine .typeLine {
+  margin-left: 5px;
+}
+.collLine .actionLine {
+  margin-left: 10px;
+}
+.apiFunctions .filterFns div {
+  display: inline-block;
+  width: 45%;
+  margin: auto;
+  vertical-align: top;
+}  
+
+@import "../mainControls/mainControls.less";

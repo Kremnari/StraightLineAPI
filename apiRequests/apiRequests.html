@@ -1,0 +1,117 @@
+<h4>Api Development</h4>
+<div class="header">
+    <button class="btn btn-info" ng-show="ar.area != 'collections'" ng-click="ar.area = 'collections'; ar.editing = {}">Collections</button>
+    <button class="btn btn-info" ng-show="ar.area == 'editType'" ng-click2="ar.backup()">Types of {{ar.editing.coll}}</button>
+    <button class="btn btn-info" ng-show="ar.area == 'editAction'" ng-click="ar.backup()">Actions of {{ar.editing.coll}}</button>
+    <button class="btn btn-info" ng-show="ar.area == 'editVars'" ng-click="ar.backup()">Vars of {{ar.editing.type}}</button>
+</div>
+<div class="apiSection" ng-show="ar.area === 'collections'">
+    <form>
+        <input type="text" ng-model="ar.newCollection" placeholder="Name New Collection">
+        <input type='submit' class="btn btn-success btn-xs" ng-click="ar.addCollection()" value='Add'>
+    </form>
+    <div class="collLine" ng-repeat="(coll, data) in ar.jsonFile.json.api">
+        <div ng-mouseover="showSubColl=true" ng-mouseleave="showSubColl=false; addSub = false">
+            <span ng-click="ar.editCollection(coll)">{{coll}}</span>
+            <span ng-show="jQuery.isEmptyObject({})">...</span>
+            <span ng-show="showSubColl">
+                <span class="btn btn-success btn-xs glyphicon glyphicon-plus" ng-click="addSub = true" ng-init="addSub = false" ng-show="addSub == false"></span>
+                <span class="btn btn-danger btn-xs glyphicon glyphicon-minus" ng-click=""></span>
+                <div class="typeLine" ng-repeat="(type, subdata) in ar.jsonFile.json.api[coll].types ">
+                    <span ng-click="ar.editType(coll, type)">{{type}}</span>
+                    <span class="btn btn-success btn-xs glyphicon glyphicon-plus hidden" ng-click="addAction = true" ng-init="addAction = false" ng-show="addAction == false"></span><br>
+                    <span class="includeLine" ng-show="subdata['include'] != null">Include File: {{subdata['include']}}</span>
+                    <div class="actionLine" ng-repeat="(action, actionData) in ar.jsonFile.json.api[coll].types[type].actions">
+                        <span ng-click="ar.editAction(coll, type, action)">{{action}}</span>
+                    </div>
+                    <div ng-show="addAction">
+                        <form>
+                            <input type="text" ng-model="newAction" placeholder="Name new action">
+                            <input type='submit' class="btn btn-success btn-xs" ng-click="ar.addAction(this)" value="Add">
+                        </form>
+                        <button class="btn btn-danger btn-xs glyphicon glyphicon-remove" ng-click="addAction = false"></button>
+                    </div>
+                </div>
+                <div ng-show="addSub">
+                    <form>
+                        <input type="text" ng-model="newType" placeholder="Name new sub object">
+                        <input type='submit' class="btn btn-success btn-xs" ng-click="ar.addType(this)" value="Add">
+                    </form>
+                    <span class="btn btn-danger btn-xs glyphicon glyphicon-remove" ng-click="addSub = false"></span>
+                </div>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="apiSection" ng-show="ar.area == 'editCollection'">
+    <h4>{{ar.editing.coll}} &gt;</h4>
+    <p>Include File: <input type="text" ng-model="ar.editing.json.includePhpFile"></p>
+    <div ng-repeat="(each, value) in ar.editing.json.types">
+        <span ng-click="ar.editType(ar.editing.coll, each)">{{each}}</span>
+    </div>
+    <span class="btn btn-xs btn-warning" ng-click="addType = true" ng-show="!addType" ng-init="addType = false">Add</span>
+    <div ng-show="addType">
+        <form>
+            Type Name: <input type="text" ng-model="newType">
+            <input type="submit" class="btn btn-info btn-xs" ng-click="ar.addType(this)" ng-click2="ar.editing.json.types[typeName] = ar.newTypeStub(ar.editing.coll, ar.editing.type); addType = false" value="Add">
+        </form>
+        <span class="btn btn-xs btn-success glyphicon glyphicon-remove" ng-click="typeName = null; addType = false"></span>
+    </div>
+</div>
+<div class="apiSection" ng-show="ar.area == 'editType'">
+    <h4>{{ar.editing.coll}} &gt; {{ar.editing.type}} &gt; </h4>
+    <div ng-repeat="(each, value) in ar.editing.json.actions">
+        <span ng-click="ar.editAction(ar.editing.coll, ar.editing.type, each)">{{each}}</span>
+    </div>
+    <span class="btn btn-xs btn-warning" ng-click="addAction = true" ng-show="!addAction" ng-init="addAction = false">Add</span>
+    <div ng-show="addAction">
+        <form>
+            Action Name: <input type="text" ng-model="actionName">
+            <input type="submit" class="btn btn-info btn-xs" ng-click="ar.editing.json.actions[actionName] = ar.newActionStub(ar.editing.type, actionName); addAction = false" value="Add">
+        </form>
+        <span class="btn btn-xs btn-success glyphicon glyphicon-remove" ng-click="actionName = null; addAction = false"></span>
+    </div>
+</div>
+<div class="apiSection" ng-show="ar.area == 'editAction'">
+    <h4>{{ar.editing.coll}} &gt; {{ar.editing.type}} &gt; {{ar.editing.action}} &gt; </h4>
+    <p>Function Call: <input type="text" ng-model="ar.editing.json.call"></p>
+    <p>Local Variables: </p>
+    <div ng-repeat="(each, value) in ar.editing.json.vars">
+        <span ng-click="ar.editVar(each)">{{each}}</span>
+    </div>
+    <span class="btn btn-xs btn-warning" ng-click="addVar = true" ng-show="!addVar" ng-init="addVar = false">Add</span>
+    <div ng-show="addVar">
+        <form>
+            Variable Name: <input type="text" ng-model="varName">
+        <input type="submit" class="btn btn-info btn-xs" ng-click="ar.editing.json.vars[varName] = {vname: varName, varTypes: {} }; addVar = false" value="Add">
+        </form>
+        <span class="btn btn-xs btn-success glyphicon glyphicon-remove" ng-click="varName = null; addVar = false"></span>
+    </div>
+</div>
+<div class="apiSection" ng-show="ar.area == 'editVars'">
+    <h4>{{ar.editing.coll}} &gt; {{ar.editing.type}} &gt; {{ar.editing.action}} &gt; {{ar.editing.vars}} &gt;</h4>
+    <p>Variable name: <input type="text" ng-model="ar.editing.json.vname"></p>
+    <p>Possible values:</p>
+    <div ng-repeat="(each, opts) in ar.editing.json.varTypes">
+        {{each}}: {{opts.desc}}
+    </div>
+    <span class="btn btn-success glyphicon glyphicon-plus" ng-click="addVarType = true" ng-init="addVarType = false" ng-show="!addVarType"></span>
+    <div ng-show="addVarType">
+        Add a new schema for this variable.  This determines what sanitization/validation function to use
+        <form>
+            <div ng-hide="ar.showNewFilter">
+                <select ng-options="filter for (filter, filterProps) in ar.jsonFile.json.filters" ng-model="newVar.filter">
+                </select><br>
+                <button class="btn btn-info btn-xs" ng-click="ar.showNewFilter = true">New</button>
+            </div>
+            <div ng-show="ar.showNewFilter">
+                
+                <input type="text" ng-model="newVar.name" placeholder="function name, or string">
+                is Function? <input type="checkbox" ng-model="newType.isFn">
+                <input type="text" ng-model="newVar.desc" placeholder="description of use">
+                <input type='submit' class="btn btn-xs btn-success" ng-click="ar.addVarType(newVar, this)" value="include">
+            </div>
+        </form>
+        <span class="btn btn-xs btn-success glyphicon glyphicon-remove" ng-click="newVar = null; addVarType = false"></span>
+    </div>
+</div>

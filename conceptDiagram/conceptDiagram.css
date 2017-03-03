@@ -1,0 +1,30 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 7, 2015, 10:48:50 AM
+    Author     : Kremnari
+*/
+#conceptDiagram {
+    width: 750px;
+    height: 750px;
+}
+#conceptDiagram .diagramSection {
+    position: relative;
+    width: 600px;
+    height: 750px;
+    border: 2px dashed lightgreen;
+    box-sizing: border-box;
+}
+#conceptDiagram .lines {
+    border: 2px solid lightgreen;
+    height: 0px;
+}
+#conceptDiagram .area {
+    border: 2px solid lightgreen;
+    border-radius: 6px;
+    position:absolute;
+    display: inline;
+}

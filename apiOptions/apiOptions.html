@@ -1,0 +1,17 @@
+<h4>API Options</h4>
+<div class="header">
+</div>
+<div>
+    <label for="buildSource">Builder Sources Endpoint</label>
+    <input type="text" name="buildSource" ng-model="ao.srcrepo">
+    <button ng-click="ao.updatesrcs()">Read Repo</button>
+</div>
+<span>Client Side Frontend Forms</span>
+<select ng-model="ao.jf.json.apiOptions.src.csf" ng-options="option as option for option in ao.srcs.csf"></select><br>
+<span>Client Side Backend</span>
+<select ng-model="ao.jf.json.apiOptions.src.csb" ng-options="option as option for option in ao.srcs.csb"></select><br>
+<span>Server Side Script</span>
+<select ng-model="ao.jf.json.apiOptions.src.sss" ng-options="option as option for option in ao.srcs.sss"></select><br>
+<span>Server DB Interface</span>
+<select ng-model="ao.jf.json.apiOptions.src.sdb" ng-options="option as option for option in ao.srcs.sdb"></select><br>
+<button ng-click="ao.loadSources()">Load Sources</button>

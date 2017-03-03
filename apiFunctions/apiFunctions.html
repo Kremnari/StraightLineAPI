@@ -1,0 +1,16 @@
+<h4>API Globals</h4>
+<div class="filterFns" ng-show="af.area == 'filterFunctions'">
+    <h5>Filter Functions</h5>
+    <div>
+        <p ng-repeat="(filter, filterProps) in af.jsonFile.json.filters">
+            <span ng-click="af.editFilter(filter, filterProps)">{{filter}}</span>
+        </p>
+    </div>
+    <div ng-show="af.editing!=null">
+        function {{af.editing.fn}}($test) {<br>
+        <textarea rows="4" cols="20" ng-model="af.editing.code"></textarea><br>
+        }<br>
+        <span ng-click="af.saveEdit()">save</span>
+        <span ng-click="af.editing = null">cancel</span>
+    </div>
+</div>

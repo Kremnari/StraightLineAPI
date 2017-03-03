@@ -1,0 +1,15 @@
+<div class="diagramSection" ng-click="cd.addArea($event)">
+    <div ng-repeat="line in cd.lines" style="{{line.style}}" class="line"></div>
+    <div ng-repeat="area in cd.areas" style="{{area.style}}" class="area" ng-click="cd.editArea($event, area)">
+        <div ng-if="area.editing">
+            <input type="text" placeholder="name" ng-model="area.name"/>
+        </div>
+        <div ng-if="!area.editing">
+            <p>{{area.name}}</p>
+        </div>
+    </div>
+</div>
+<div class="detailsSection">
+    
+</div>
+<link rel="stylesheet" href="conceptDiagram/conceptDiagram.css" />
